@@ -160,7 +160,4 @@ To use the hosted copy instead of regenerating, unzip the data file.
 
 ---
 
-## Use of generative AI
-
-In line with the course policy, generative AI (Anthropic's Claude) was used during this assignment. The implementation code, unit tests and benchmarking scripts were  ideated, verified with AI assistance, then reviewed, run and tested by the author.
 ---
