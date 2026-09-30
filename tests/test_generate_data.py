@@ -1,4 +1,5 @@
 """Unit tests for the dataset generator.
+
 """
 
 import numpy as np
@@ -43,9 +44,18 @@ def test_miss_queries_never_hit(dataset):
     assert not np.isin(dataset["miss_queries"], dataset["keys"]).any()
 
 
+def test_hot_keys_are_a_random_subset(dataset):
+    hot_keys = dataset["hot_keys"]
+    assert len(hot_keys) == max(1, int(N * HOT_KEY_FRACTION))
+    assert len(set(hot_keys.tolist())) == len(hot_keys)
+    assert np.isin(hot_keys, dataset["keys"]).all()
+    # Must not simply be the first-inserted keys (those sit near the root).
+    assert not np.array_equal(np.sort(hot_keys),
+                              np.sort(dataset["keys"][:len(hot_keys)]))
+
+
 def test_hot_queries_are_skewed(dataset):
-    hot_keys = dataset["keys"][:max(1, int(N * HOT_KEY_FRACTION))]
-    share_hot = np.isin(dataset["hot_queries"], hot_keys).mean()
+    share_hot = np.isin(dataset["hot_queries"], dataset["hot_keys"]).mean()
     assert share_hot > 0.85  # ~0.90 expected; allows for sampling noise
 
 

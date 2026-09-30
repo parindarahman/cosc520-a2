@@ -5,19 +5,24 @@ For each size n, one .npz file is written to data/ containing:
                        for the random workload; sort them for the sorted workload)
     uniform_queries -- search keys drawn uniformly from `keys` (successful searches)
     miss_queries    -- odd integers, so never in the tree (unsuccessful searches)
-    hot_queries     -- skewed searches: HOT_QUERY_SHARE of them hit a small
-                       "hot" subset (HOT_KEY_FRACTION of the keys)
+    hot_keys        -- the "hot" subset: HOT_KEY_FRACTION of the keys, chosen
+                       at random (not by insertion order, which would bias
+                       the benchmark towards unbalanced trees)
+    hot_queries     -- skewed searches: HOT_QUERY_SHARE of them hit hot_keys
     delete_keys     -- distinct keys from `keys`, to be removed
 
 Every file is reproducible from SEED, so re-running the script regenerates
 exactly the same data.
 
 CSV copies (one single-column file per array, under data/csv/n_<size>/) can
-also be written with --csv; 
+also be written with --csv; they are for sharing/uploading, while the
+benchmark reads the faster .npz files.
+
 Usage (from the project root):
     python -m benchmarks.generate_data                  # all default sizes
     python -m benchmarks.generate_data --csv            # also write CSV copies
     python -m benchmarks.generate_data --sizes 1000 10000
+
 """
 
 import argparse
@@ -53,9 +58,11 @@ def generate_dataset(n, seed=SEED):
     # Odd numbers lie strictly between stored keys, so every miss searches to a leaf.
     miss_queries = 2 * rng.integers(0, n, size=num_queries, dtype=np.int64) + 1
 
-    # keys is already shuffled, so its first slice is a random hot subset.
+    # Hot keys are drawn at random from ALL keys. (Taking the first keys of
+    # the insertion order would bias the benchmark: early-inserted keys sit
+    # near the root of a BST/AVL/Red-Black tree, making them unfairly cheap.)
     hot_count = max(1, int(n * HOT_KEY_FRACTION))
-    hot_keys = keys[:hot_count]
+    hot_keys = rng.choice(keys, size=hot_count, replace=False)
     use_hot = rng.random(num_queries) < HOT_QUERY_SHARE
     hot_queries = np.where(use_hot,
                            rng.choice(hot_keys, size=num_queries),
@@ -67,6 +74,7 @@ def generate_dataset(n, seed=SEED):
         "keys": keys,
         "uniform_queries": uniform_queries,
         "miss_queries": miss_queries,
+        "hot_keys": hot_keys,
         "hot_queries": hot_queries,
         "delete_keys": delete_keys,
     }

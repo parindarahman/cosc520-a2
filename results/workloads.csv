@@ -1,0 +1,49 @@
+workload,structure,run,n_used,build_s,search_us,height
+Random,BST,1,1000000,2.569107,2.9032,50
+Sorted ascending,BST,1,10000,2.277457,183.0508,10000
+Sorted descending,BST,1,10000,2.083462,187.0326,10000
+Hot-key search,BST,1,1000000,,2.5629,
+Random,BST,2,1000000,2.491460,2.6344,50
+Sorted ascending,BST,2,10000,2.057387,173.8004,10000
+Sorted descending,BST,2,10000,2.033510,184.4854,10000
+Hot-key search,BST,2,1000000,,2.2535,
+Random,BST,3,1000000,2.523375,2.7713,50
+Sorted ascending,BST,3,10000,2.244238,180.0595,10000
+Sorted descending,BST,3,10000,2.091294,191.5195,10000
+Hot-key search,BST,3,1000000,,1.8952,
+Random,AVL,1,1000000,4.863632,2.2951,24
+Sorted ascending,AVL,1,1000000,3.620631,2.4432,20
+Sorted descending,AVL,1,1000000,3.688355,2.2938,20
+Hot-key search,AVL,1,1000000,,1.5841,
+Random,AVL,2,1000000,4.875927,2.3313,24
+Sorted ascending,AVL,2,1000000,3.604138,2.2718,20
+Sorted descending,AVL,2,1000000,3.643080,2.4312,20
+Hot-key search,AVL,2,1000000,,1.8083,
+Random,AVL,3,1000000,4.778425,2.2560,24
+Sorted ascending,AVL,3,1000000,3.576077,2.1645,20
+Sorted descending,AVL,3,1000000,3.595371,2.0701,20
+Hot-key search,AVL,3,1000000,,1.8328,
+Random,Red-Black,1,1000000,2.981595,2.7199,24
+Sorted ascending,Red-Black,1,1000000,2.385544,2.6968,37
+Sorted descending,Red-Black,1,1000000,2.401746,2.3943,37
+Hot-key search,Red-Black,1,1000000,,1.6292,
+Random,Red-Black,2,1000000,2.977003,2.3073,24
+Sorted ascending,Red-Black,2,1000000,2.382508,2.5169,37
+Sorted descending,Red-Black,2,1000000,2.398811,2.3229,37
+Hot-key search,Red-Black,2,1000000,,1.9734,
+Random,Red-Black,3,1000000,2.929997,2.3257,24
+Sorted ascending,Red-Black,3,1000000,2.435313,2.3541,37
+Sorted descending,Red-Black,3,1000000,2.407707,2.4318,37
+Hot-key search,Red-Black,3,1000000,,1.9958,
+Random,Splay,1,1000000,8.222331,9.5243,53
+Sorted ascending,Splay,1,1000000,0.606732,14.9239,1000000
+Sorted descending,Splay,1,1000000,0.607254,14.9952,1000000
+Hot-key search,Splay,1,1000000,,5.2867,
+Random,Splay,2,1000000,8.115888,8.8511,53
+Sorted ascending,Splay,2,1000000,0.595150,14.8291,1000000
+Sorted descending,Splay,2,1000000,0.606471,14.4865,1000000
+Hot-key search,Splay,2,1000000,,5.1934,
+Random,Splay,3,1000000,8.527041,9.1890,53
+Sorted ascending,Splay,3,1000000,0.604679,14.6499,1000000
+Sorted descending,Splay,3,1000000,0.622316,14.3857,1000000
+Hot-key search,Splay,3,1000000,,5.1816,
